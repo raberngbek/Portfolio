@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, ArrowUpRight, Download } from 'lucide-react';
-import Button from '../ui/Button';
+import { Menu, X, ArrowUpRight } from 'lucide-react';
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -18,7 +17,6 @@ export default function Navbar() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Close mobile menu when changing route
   useEffect(() => {
     setIsOpen(false);
   }, [location]);
@@ -26,6 +24,7 @@ export default function Navbar() {
   const navLinks = [
     { name: 'Work', href: isHomePage ? '#work' : '/#work' },
     { name: 'About', href: isHomePage ? '#about' : '/#about' },
+    { name: 'Approach', href: isHomePage ? '#approach' : '/#approach' },
     { name: 'Skills', href: isHomePage ? '#skills' : '/#skills' },
     { name: 'Resume', href: '/resume/Chhaeng_Sokuntheara_Resume.pdf', external: true, download: true },
   ];
@@ -34,19 +33,26 @@ export default function Navbar() {
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         scrolled
-          ? 'bg-background/85 backdrop-blur-md border-b border-border/70 py-3.5 shadow-sm'
+          ? 'bg-background/90 backdrop-blur-md border-b border-border py-3.5 shadow-sm'
           : 'bg-transparent py-5'
       }`}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-content mx-auto px-6 sm:px-8 lg:px-12">
         <div className="flex items-center justify-between">
-          {/* Brand Logo */}
+          {/* Brand Logo with subtle portrait avatar */}
           <Link
             to="/"
-            className="group flex items-center gap-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded-md"
-            aria-label="Chhaeng Sokuntheara Portfolio Home"
+            className="group flex items-center gap-2.5 focus:outline-none"
+            aria-label="Chhaeng Sokuntheara Home"
           >
-            <span className="font-bold text-lg md:text-xl tracking-tight text-text-primary group-hover:text-accent transition-colors">
+            <div className="w-8 h-8 rounded-full overflow-hidden border border-border group-hover:border-accent transition-colors flex-shrink-0">
+              <img
+                src="/images/portrait.jpg"
+                alt="Chhaeng Sokuntheara"
+                className="w-full h-full object-cover object-center"
+              />
+            </div>
+            <span className="font-extrabold text-base md:text-lg tracking-tight text-text-primary group-hover:text-accent transition-colors">
               SOKUNTHEARA<span className="text-accent">.</span>
             </span>
           </Link>
@@ -61,20 +67,16 @@ export default function Navbar() {
                   target="_blank"
                   rel="noopener noreferrer"
                   download={link.download}
-                  className="text-sm font-medium text-text-secondary hover:text-text-primary transition-colors flex items-center gap-1"
+                  className="text-xs font-semibold uppercase tracking-wider text-text-secondary hover:text-text-primary transition-colors flex items-center gap-0.5"
                 >
-                  {link.name}
-                  {link.download ? (
-                    <Download className="w-3.5 h-3.5 text-text-muted" />
-                  ) : (
-                    <ArrowUpRight className="w-3.5 h-3.5 text-text-muted" />
-                  )}
+                  <span>{link.name}</span>
+                  <ArrowUpRight className="w-3 h-3 text-text-muted" />
                 </a>
               ) : isHomePage ? (
                 <a
                   key={link.name}
                   href={link.href}
-                  className="text-sm font-medium text-text-secondary hover:text-text-primary transition-colors"
+                  className="text-xs font-semibold uppercase tracking-wider text-text-secondary hover:text-text-primary transition-colors"
                 >
                   {link.name}
                 </a>
@@ -82,27 +84,25 @@ export default function Navbar() {
                 <Link
                   key={link.name}
                   to={link.href}
-                  className="text-sm font-medium text-text-secondary hover:text-text-primary transition-colors"
+                  className="text-xs font-semibold uppercase tracking-wider text-text-secondary hover:text-text-primary transition-colors"
                 >
                   {link.name}
                 </Link>
               )
             ))}
 
-            {/* CTA Button */}
-            <Button
+            <a
               href={isHomePage ? '#contact' : '/#contact'}
-              variant="primary"
-              size="sm"
+              className="text-xs font-bold uppercase tracking-wider px-4 py-2 rounded-full border border-border hover:border-accent text-text-primary hover:text-accent bg-surface transition-all"
             >
               Let's Talk
-            </Button>
+            </a>
           </nav>
 
           {/* Mobile Menu Button */}
           <button
             type="button"
-            className="md:hidden p-2 rounded-lg text-text-secondary hover:text-text-primary hover:bg-surface border border-border/40 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+            className="md:hidden p-2 rounded-lg text-text-secondary hover:text-text-primary hover:bg-surface focus:outline-none"
             onClick={() => setIsOpen(!isOpen)}
             aria-expanded={isOpen}
             aria-label="Toggle navigation menu"
@@ -112,10 +112,10 @@ export default function Navbar() {
         </div>
       </div>
 
-      {/* Mobile Dropdown Menu */}
+      {/* Mobile Menu */}
       {isOpen && (
-        <div className="md:hidden bg-background/95 backdrop-blur-xl border-b border-border/80 px-4 pt-3 pb-6 space-y-3 animate-in fade-in slide-in-from-top-2 duration-200">
-          <nav className="flex flex-col space-y-2">
+        <div className="md:hidden bg-background/98 border-b border-border px-6 pt-4 pb-8 space-y-4 shadow-xl">
+          <nav className="flex flex-col space-y-3">
             {navLinks.map((link) => (
               link.external ? (
                 <a
@@ -124,21 +124,17 @@ export default function Navbar() {
                   target="_blank"
                   rel="noopener noreferrer"
                   download={link.download}
-                  className="px-3 py-2.5 rounded-md text-base font-medium text-text-secondary hover:text-text-primary hover:bg-surface flex items-center justify-between"
+                  className="py-2 text-base font-medium text-text-primary flex items-center justify-between"
                   onClick={() => setIsOpen(false)}
                 >
                   <span>{link.name}</span>
-                  {link.download ? (
-                    <Download className="w-4 h-4 text-text-muted" />
-                  ) : (
-                    <ArrowUpRight className="w-4 h-4 text-text-muted" />
-                  )}
+                  <ArrowUpRight className="w-4 h-4 text-text-muted" />
                 </a>
               ) : isHomePage ? (
                 <a
                   key={link.name}
                   href={link.href}
-                  className="px-3 py-2.5 rounded-md text-base font-medium text-text-secondary hover:text-text-primary hover:bg-surface"
+                  className="py-2 text-base font-medium text-text-primary"
                   onClick={() => setIsOpen(false)}
                 >
                   {link.name}
@@ -147,7 +143,7 @@ export default function Navbar() {
                 <Link
                   key={link.name}
                   to={link.href}
-                  className="px-3 py-2.5 rounded-md text-base font-medium text-text-secondary hover:text-text-primary hover:bg-surface"
+                  className="py-2 text-base font-medium text-text-primary"
                   onClick={() => setIsOpen(false)}
                 >
                   {link.name}
@@ -155,16 +151,15 @@ export default function Navbar() {
               )
             ))}
           </nav>
-          <div className="pt-2 border-t border-border/50">
-            <Button
+
+          <div className="pt-2 border-t border-border">
+            <a
               href={isHomePage ? '#contact' : '/#contact'}
-              variant="primary"
-              size="md"
-              className="w-full text-center"
+              className="block w-full text-center text-xs font-bold uppercase tracking-wider py-3 rounded-full bg-accent text-background font-semibold"
               onClick={() => setIsOpen(false)}
             >
               Let's Talk
-            </Button>
+            </a>
           </div>
         </div>
       )}

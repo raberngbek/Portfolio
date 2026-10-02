@@ -1,147 +1,130 @@
 import React from 'react';
-import SectionTitle from '../components/ui/SectionTitle';
-import { ArrowRight, Layers, Palette, Terminal, MonitorSmartphone, CheckCircle, Code, Workflow, ShieldCheck } from 'lucide-react';
+import { ArrowRight, CheckCircle2, Code2, Layers, Palette, Terminal } from 'lucide-react';
 
 export default function DesignEngineering() {
-  const steps = [
-    {
-      step: '01',
-      title: 'Figma Component',
-      desc: 'Auto-layout, atomic variants, and strict constraints designed for real-world code translation.',
-      icon: Layers,
-      tag: 'Auto-layout & Variants',
-      color: 'text-sky-400',
-      bgColor: 'bg-sky-500/10',
-      borderColor: 'border-sky-500/30',
-    },
-    {
-      step: '02',
-      title: 'Design Tokens',
-      desc: 'Extracted semantic hex values, rem spacing scales, font hierarchies, and elevation tokens.',
-      icon: Palette,
-      tag: 'Tokens & Spacing Scale',
-      color: 'text-indigo-400',
-      bgColor: 'bg-indigo-500/10',
-      borderColor: 'border-indigo-500/30',
-    },
-    {
-      step: '03',
-      title: 'React & Tailwind',
-      desc: 'Clean prop interfaces, composable JSX components, and utility classes with zero design drift.',
-      icon: Terminal,
-      tag: 'Props & Semantic JSX',
-      color: 'text-emerald-400',
-      bgColor: 'bg-emerald-500/10',
-      borderColor: 'border-emerald-500/30',
-    },
-    {
-      step: '04',
-      title: 'Responsive Result',
-      desc: 'Thoroughly tested from 1440px desktop to 390px mobile screens without horizontal overflow.',
-      icon: MonitorSmartphone,
-      tag: 'Desktop ➔ Mobile',
-      color: 'text-amber-400',
-      bgColor: 'bg-amber-500/10',
-      borderColor: 'border-amber-500/30',
-    },
-  ];
-
-  const pillars = [
-    {
-      title: 'Design Tokens',
-      desc: 'Colors, spacing, and typography scales share identical nomenclature across Figma styles and Tailwind configs.',
-      icon: Palette,
-    },
-    {
-      title: 'Responsive Layout',
-      desc: 'Auto-layout rules in Figma mirror CSS Flexbox and Grid, making breakpoint adaptations seamless.',
-      icon: MonitorSmartphone,
-    },
-    {
-      title: 'Component States',
-      desc: 'Every interactive element accounts for default, hover, active, focus-visible, disabled, and loading states.',
-      icon: Workflow,
-    },
-    {
-      title: 'Developer Handoff',
-      desc: 'No guesswork for engineers: prop names, padding values, and ARIA accessibility roles are explicitly documented.',
-      icon: ShieldCheck,
-    },
+  const sequence = [
+    { step: '01', name: 'Figma', desc: 'Auto-layout & nested component variants' },
+    { step: '02', name: 'Design System', desc: 'Atomic design tokens & spacing scale' },
+    { step: '03', name: 'React', desc: 'Clean props contract & composable JSX' },
+    { step: '04', name: 'Responsive Product', desc: 'Fluid layout from 1440px to 390px' },
   ];
 
   return (
-    <section id="engineering" className="py-20 md:py-28 bg-background border-b border-border/60">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <SectionTitle
-          badge="Design × Engineering"
-          title="I don’t stop at the Figma file."
-          subtitle="Because I write code, I design with real-world implementation constraints, token architectures, and responsive logic in mind from day one."
-          align="left"
-        />
+    <section id="engineering" className="py-24 md:py-36 border-b border-border">
+      <div className="max-w-content mx-auto px-6 sm:px-8 lg:px-12">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+          
+          {/* Left Column: Editorial Headline & Story */}
+          <div className="lg:col-span-6 space-y-6">
+            <span className="font-mono text-xs uppercase tracking-widest text-text-muted block">
+              DESIGN × ENGINEERING
+            </span>
 
-        {/* Visual Pipeline Flow */}
-        <div className="mb-16">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 relative">
-            {steps.map((item, index) => {
-              const Icon = item.icon;
-              return (
-                <div
-                  key={item.step}
-                  className="relative p-6 rounded-2xl bg-surface border border-border hover:border-slate-700 transition-all duration-300 flex flex-col justify-between"
-                >
-                  <div>
-                    <div className="flex items-center justify-between mb-4">
-                      <span className="font-mono text-xs font-bold text-text-muted">
-                        STEP {item.step}
-                      </span>
-                      <div className={`p-2 rounded-xl ${item.bgColor} ${item.color}`}>
-                        <Icon className="w-5 h-5" />
-                      </div>
-                    </div>
+            <h2 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-text-primary leading-[1.05]">
+              I don't stop at the <br />
+              Figma file.
+            </h2>
 
-                    <h3 className="text-base font-bold text-text-primary mb-2">
-                      {item.title}
-                    </h3>
+            <p className="text-lg sm:text-xl text-text-secondary leading-relaxed font-normal">
+              Because I write code, I design with real-world implementation constraints, token architectures, and responsive logic in mind from day one.
+            </p>
 
-                    <p className="text-xs sm:text-sm text-text-secondary leading-relaxed">
+            {/* Sequence Flow */}
+            <div className="pt-6 space-y-4">
+              <span className="text-xs font-mono uppercase tracking-widest text-text-muted block mb-3">
+                THE FIGMA-TO-CODE PIPELINE
+              </span>
+              <div className="grid grid-cols-2 gap-4">
+                {sequence.map((item) => (
+                  <div key={item.step} className="p-4 rounded-xl bg-surface border border-border">
+                    <span className="font-mono text-xs font-bold text-accent block mb-1">
+                      {item.step} / {item.name}
+                    </span>
+                    <span className="text-xs text-text-secondary block">
                       {item.desc}
-                    </p>
-                  </div>
-
-                  <div className="mt-6 pt-3 border-t border-border/50">
-                    <span className={`inline-block text-[11px] font-mono px-2 py-0.5 rounded-full border ${item.borderColor} ${item.bgColor} ${item.color}`}>
-                      {item.tag}
                     </span>
                   </div>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-
-        {/* 4 Architectural Pillars Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {pillars.map((pillar, idx) => {
-            const Icon = pillar.icon;
-            return (
-              <div
-                key={idx}
-                className="p-5 rounded-xl bg-surface-elevated/60 border border-border/80 hover:border-accent/40 transition-colors"
-              >
-                <div className="w-8 h-8 rounded-lg bg-accent/10 text-accent flex items-center justify-center mb-3">
-                  <Icon className="w-4 h-4" />
-                </div>
-                <h4 className="text-sm font-semibold text-text-primary mb-1.5">
-                  {pillar.title}
-                </h4>
-                <p className="text-xs text-text-secondary leading-relaxed">
-                  {pillar.desc}
-                </p>
+                ))}
               </div>
-            );
-          })}
-        </div>
+            </div>
+          </div>
 
+          {/* Right Column: One Polished Visual */}
+          <div className="lg:col-span-6">
+            <div className="bg-surface rounded-2xl border border-border p-6 sm:p-8 shadow-sm space-y-6">
+              <div className="flex items-center justify-between pb-4 border-b border-border">
+                <div className="flex items-center gap-2">
+                  <div className="w-2.5 h-2.5 rounded-full bg-accent" />
+                  <span className="text-xs font-mono font-semibold text-text-primary">
+                    Button.figma ➔ Button.jsx
+                  </span>
+                </div>
+                <span className="text-[11px] font-mono text-accent-emerald bg-accent-emerald/10 px-2 py-0.5 rounded-full">
+                  100% Token Parity
+                </span>
+              </div>
+
+              {/* Code & Token Comparison Showcase */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 font-mono text-xs">
+                {/* Figma Specs */}
+                <div className="p-4 rounded-xl bg-surface-elevated/70 border border-border space-y-2">
+                  <span className="text-[10px] text-text-muted uppercase tracking-wider block font-bold">
+                    Figma Properties
+                  </span>
+                  <div className="text-text-secondary space-y-1">
+                    <div className="flex justify-between">
+                      <span>variant:</span>
+                      <span className="text-text-primary font-semibold">'primary'</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span>padding:</span>
+                      <span className="text-text-primary font-semibold">14px 24px</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span>radius:</span>
+                      <span className="text-text-primary font-semibold">9999px</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span>contrast:</span>
+                      <span className="text-accent-emerald font-semibold">14.8:1 (AAA)</span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* React / Tailwind Specs */}
+                <div className="p-4 rounded-xl bg-surface-elevated/70 border border-border space-y-2">
+                  <span className="text-[10px] text-text-muted uppercase tracking-wider block font-bold">
+                    React / Tailwind Props
+                  </span>
+                  <div className="text-text-secondary space-y-1">
+                    <div className="flex justify-between">
+                      <span>px-6 py-3.5</span>
+                      <span className="text-text-muted">scale</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span>bg-accent</span>
+                      <span className="text-text-muted">#0284C7</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span>rounded-full</span>
+                      <span className="text-text-muted">pill</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span>focus-visible</span>
+                      <span className="text-accent font-semibold">a11y ring</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="pt-2 text-xs text-text-muted flex items-center justify-between border-t border-border">
+                <span>Zero design-to-development drift</span>
+                <span className="font-mono text-text-primary">Figma Auto-Layout ➔ CSS Flexbox</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
       </div>
     </section>
   );

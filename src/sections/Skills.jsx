@@ -1,73 +1,84 @@
 import React from 'react';
-import SectionTitle from '../components/ui/SectionTitle';
-import SkillCard from '../components/ui/SkillCard';
-import { designSkillCategories, technicalSkills } from '../data/skills';
-import { Code2, CheckCircle2, Sparkles, Terminal } from 'lucide-react';
 
 export default function Skills() {
-  return (
-    <section id="skills" className="py-20 md:py-28 bg-background border-b border-border/60">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
-        
-        {/* SECTION 07 — DESIGN SKILLS (Product-Design-First) */}
-        <div>
-          <SectionTitle
-            badge="Section 07 • Design Skills"
-            title="Design & Product Capabilities"
-            subtitle="Core strengths as an aspiring UI/UX and Product Design intern: from user flow mapping and wireframes to design systems and high-fidelity prototypes."
-            align="left"
-            className="mb-8 md:mb-10"
-          />
+  const groups = [
+    {
+      category: 'DESIGN',
+      skills: [
+        'UI Design',
+        'Product Design',
+        'Wireframing',
+        'User Flows',
+        'Prototyping',
+        'Design Systems',
+        'Responsive Design',
+        'Usability Testing',
+      ],
+    },
+    {
+      category: 'TOOLS',
+      skills: [
+        'Figma',
+        'FigJam',
+        'Framer',
+        'Adobe XD',
+        'Illustrator',
+      ],
+    },
+    {
+      category: 'FRONT-END',
+      skills: [
+        'HTML',
+        'CSS',
+        'Tailwind CSS',
+        'JavaScript',
+        'React',
+        'Git',
+        'GitHub',
+        'Developer Collaboration',
+      ],
+    },
+  ];
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {designSkillCategories.map((category) => (
-              <SkillCard key={category.id} category={category} />
-            ))}
-          </div>
+  return (
+    <section id="skills" className="py-24 md:py-36 border-b border-border">
+      <div className="max-w-content mx-auto px-6 sm:px-8 lg:px-12">
+        
+        {/* Section Header */}
+        <div className="mb-16">
+          <span className="font-mono text-xs uppercase tracking-widest text-text-muted block mb-2">
+            CAPABILITIES
+          </span>
+          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-text-primary">
+            SKILLS & TOOLS
+          </h2>
         </div>
 
-        {/* SECTION 08 — TECHNICAL SKILLS (Implementation Literacy) */}
-        <div className="pt-6 border-t border-border/60">
-          <div className="mb-8">
-            <span className="inline-flex items-center gap-1.5 px-3 py-1 mb-3 text-xs font-semibold tracking-wider uppercase rounded-full bg-surface-elevated text-accent-purple border border-border">
-              <Terminal className="w-3.5 h-3.5" />
-              Section 08 • Technical Skills
-            </span>
-            <h3 className="text-2xl sm:text-3xl font-bold tracking-tight text-text-primary">
-              Front-End & Engineering Literacy
-            </h3>
-            <p className="mt-2 text-sm sm:text-base text-text-secondary max-w-2xl leading-relaxed">
-              My technical background in Computer Science enables me to design with real constraints in mind, speak the same language as developers, and ensure seamless handoff.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-3.5">
-            {technicalSkills.map((tech) => (
-              <div
-                key={tech.name}
-                className={`p-3.5 rounded-xl border transition-all ${
-                  tech.highlight
-                    ? 'bg-surface-elevated/80 border-accent/40 shadow-sm'
-                    : 'bg-surface/70 border-border/70 hover:border-slate-700'
-                }`}
-              >
-                <div className="flex items-center justify-between mb-1.5">
-                  <span className="text-[10px] font-mono uppercase tracking-wider text-text-muted">
-                    {tech.category}
-                  </span>
-                  {tech.highlight && (
-                    <span className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse" />
-                  )}
-                </div>
-                <h4 className="text-sm font-bold text-text-primary">
-                  {tech.name}
-                </h4>
-                <p className="text-[11px] text-text-secondary mt-1 line-clamp-2 leading-snug">
-                  {tech.desc}
-                </p>
+        {/* Typography-Led Grouped Columns */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 lg:gap-16">
+          {groups.map((group) => (
+            <div key={group.category} className="space-y-6">
+              <div className="pb-3 border-b-2 border-text-primary">
+                <h3 className="font-mono text-xs font-bold uppercase tracking-widest text-text-primary">
+                  {group.category}
+                </h3>
               </div>
-            ))}
-          </div>
+
+              <ul className="space-y-3.5">
+                {group.skills.map((skill) => (
+                  <li
+                    key={skill}
+                    className="text-lg sm:text-xl font-medium text-text-primary hover:text-accent transition-colors flex items-center justify-between group"
+                  >
+                    <span>{skill}</span>
+                    <span className="opacity-0 group-hover:opacity-100 text-accent transition-opacity text-sm">
+                      •
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
         </div>
 
       </div>

@@ -1,32 +1,22 @@
 import React, { useEffect } from 'react';
-import { useParams, Link, useNavigate } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import Navbar from '../../components/layout/Navbar';
 import Footer from '../../components/layout/Footer';
-import Button from '../../components/ui/Button';
 import { projects } from '../../data/projects';
 import {
   ArrowLeft,
   ArrowRight,
-  Clock,
-  Layers,
-  Smartphone,
-  Sparkles,
-  CheckCircle,
   AlertCircle,
-  Palette,
   FileCode,
-  Compass,
-  CheckCircle2
+  CheckCircle2,
 } from 'lucide-react';
 
 export default function ProjectCaseStudy() {
   const { slug } = useParams();
-  const navigate = useNavigate();
 
   const projectIndex = projects.findIndex((p) => p.slug === slug);
   const project = projects[projectIndex];
 
-  // Scroll to top when slug changes
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [slug]);
@@ -35,16 +25,19 @@ export default function ProjectCaseStudy() {
     return (
       <div className="min-h-screen flex flex-col bg-background text-text-primary">
         <Navbar />
-        <main className="flex-grow flex items-center justify-center py-32 px-4">
-          <div className="text-center max-w-md">
-            <h1 className="text-4xl font-bold mb-4">Project Not Found</h1>
-            <p className="text-text-secondary mb-8">
+        <main className="flex-grow flex items-center justify-center py-36 px-6">
+          <div className="text-center max-w-md space-y-6">
+            <h1 className="text-4xl font-extrabold tracking-tight">Project Not Found</h1>
+            <p className="text-text-secondary">
               The project case study you are looking for does not exist or has been moved.
             </p>
-            <Button href="/#work" variant="primary">
-              <ArrowLeft className="w-4 h-4 mr-2" />
-              Back to Selected Work
-            </Button>
+            <Link
+              to="/#work"
+              className="inline-flex items-center gap-2 text-sm font-bold uppercase tracking-wider px-6 py-3 rounded-full border border-text-primary hover:bg-text-primary hover:text-background transition-all"
+            >
+              <ArrowLeft className="w-4 h-4" />
+              <span>Back to Selected Work</span>
+            </Link>
           </div>
         </main>
         <Footer />
@@ -56,45 +49,46 @@ export default function ProjectCaseStudy() {
   const nextProject = projects[(projectIndex + 1) % projects.length];
 
   return (
-    <div className="min-h-screen flex flex-col bg-background text-text-primary selection:bg-accent/20 selection:text-accent">
+    <div className="min-h-screen flex flex-col bg-background text-text-primary selection:bg-accent/15 selection:text-text-primary">
       <Navbar />
 
-      <main className="flex-grow pt-28 pb-20">
-        {/* Top Breadcrumb & Back Link */}
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 mb-8">
+      <main className="flex-grow pt-36 pb-28">
+        
+        {/* Back Link */}
+        <div className="max-w-content mx-auto px-6 sm:px-8 lg:px-12 mb-12">
           <Link
             to="/#work"
-            className="inline-flex items-center gap-2 text-sm text-text-secondary hover:text-accent transition-colors font-medium"
+            className="group inline-flex items-center gap-2 text-xs font-mono uppercase tracking-wider text-text-muted hover:text-text-primary transition-colors"
           >
-            <ArrowLeft className="w-4 h-4" />
-            <span>Back to All Work</span>
+            <ArrowLeft className="w-3.5 h-3.5 transition-transform group-hover:-translate-x-1" />
+            <span className="editorial-link">Back to All Work</span>
           </Link>
         </div>
 
-        {/* Project Hero Header */}
-        <section className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 mb-16">
-          <div className="space-y-4">
+        {/* Project Header */}
+        <section className="max-w-content mx-auto px-6 sm:px-8 lg:px-12 mb-20">
+          <div className="space-y-6 max-w-4xl">
             <div className="flex items-center gap-3">
-              <span className="font-mono text-xs font-bold text-accent bg-accent/10 border border-accent/20 px-3 py-1 rounded-full">
+              <span className="font-mono text-xs font-bold text-accent uppercase tracking-widest">
                 PROJECT {project.number}
               </span>
-              <span className="text-xs font-medium text-text-muted bg-surface-elevated px-3 py-1 rounded-full border border-border">
-                {project.category}
+              <span className="text-xs font-mono uppercase tracking-wider text-text-muted">
+                / {project.category}
               </span>
             </div>
 
-            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-text-primary tracking-tight leading-tight">
+            <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-text-primary tracking-tight leading-[1.06]">
               {project.title}
             </h1>
 
-            <p className="text-lg sm:text-xl text-text-secondary leading-relaxed max-w-3xl">
+            <p className="text-xl sm:text-2xl text-text-secondary font-normal leading-relaxed">
               {project.description}
             </p>
 
             {/* Metadata Bar */}
-            <div className="mt-8 pt-8 border-t border-border grid grid-cols-2 sm:grid-cols-4 gap-6 text-sm">
+            <div className="pt-8 border-t border-border grid grid-cols-2 sm:grid-cols-4 gap-6 text-sm">
               <div>
-                <span className="text-xs font-mono uppercase text-text-muted block mb-1">
+                <span className="text-xs font-mono uppercase tracking-wider text-text-muted block mb-1">
                   My Role
                 </span>
                 <span className="font-semibold text-text-primary block">
@@ -102,7 +96,7 @@ export default function ProjectCaseStudy() {
                 </span>
               </div>
               <div>
-                <span className="text-xs font-mono uppercase text-text-muted block mb-1">
+                <span className="text-xs font-mono uppercase tracking-wider text-text-muted block mb-1">
                   Timeline
                 </span>
                 <span className="font-semibold text-text-primary block">
@@ -110,7 +104,7 @@ export default function ProjectCaseStudy() {
                 </span>
               </div>
               <div>
-                <span className="text-xs font-mono uppercase text-text-muted block mb-1">
+                <span className="text-xs font-mono uppercase tracking-wider text-text-muted block mb-1">
                   Platform
                 </span>
                 <span className="font-semibold text-text-primary block">
@@ -118,14 +112,14 @@ export default function ProjectCaseStudy() {
                 </span>
               </div>
               <div>
-                <span className="text-xs font-mono uppercase text-text-muted block mb-1">
+                <span className="text-xs font-mono uppercase tracking-wider text-text-muted block mb-1">
                   Tools
                 </span>
-                <div className="flex flex-wrap gap-1 mt-0.5">
+                <div className="flex flex-wrap gap-1.5 mt-0.5">
                   {project.tools.map((t) => (
                     <span
                       key={t}
-                      className="text-xs font-mono text-accent bg-accent/10 px-1.5 py-0.5 rounded"
+                      className="text-xs font-mono px-2 py-0.5 rounded bg-surface border border-border text-text-secondary"
                     >
                       {t}
                     </span>
@@ -136,23 +130,25 @@ export default function ProjectCaseStudy() {
           </div>
         </section>
 
-        {/* Case Study Content Body */}
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
+        {/* Case Study Content */}
+        <div className="max-w-content mx-auto px-6 sm:px-8 lg:px-12 space-y-20">
 
           {/* Section: Overview & Goal */}
           {caseStudy && (
-            <section className="space-y-6">
-              <h2 className="text-2xl font-bold text-text-primary tracking-tight pb-3 border-b border-border">
-                01. Project Overview & Goal
-              </h2>
-              <div className="space-y-4 text-text-secondary leading-relaxed text-base sm:text-lg">
-                <p>{caseStudy.overview}</p>
+            <section className="space-y-6 pt-12 border-t border-border">
+              <span className="font-mono text-xs uppercase tracking-widest text-text-muted block">
+                01 / OVERVIEW & GOAL
+              </span>
+              <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
+                <div className="lg:col-span-8 space-y-4 text-lg text-text-secondary leading-relaxed font-normal">
+                  <p>{caseStudy.overview}</p>
+                </div>
                 {caseStudy.productGoal && (
-                  <div className="p-5 rounded-2xl bg-surface border-l-4 border-accent">
-                    <h3 className="text-xs font-mono uppercase tracking-wider text-accent font-bold mb-1">
+                  <div className="lg:col-span-4 p-6 rounded-xl bg-surface border border-border space-y-2">
+                    <span className="text-xs font-mono uppercase tracking-wider text-accent font-bold block">
                       Product Goal
-                    </h3>
-                    <p className="text-text-primary font-medium">
+                    </span>
+                    <p className="text-base text-text-primary font-medium leading-relaxed">
                       {caseStudy.productGoal}
                     </p>
                   </div>
@@ -163,21 +159,26 @@ export default function ProjectCaseStudy() {
 
           {/* Section: Problems & Pain Points */}
           {caseStudy?.problems && (
-            <section className="space-y-6">
-              <h2 className="text-2xl font-bold text-text-primary tracking-tight pb-3 border-b border-border">
-                02. User Problems & Friction Points
+            <section className="space-y-6 pt-12 border-t border-border">
+              <span className="font-mono text-xs uppercase tracking-widest text-text-muted block">
+                02 / USER FRICTION POINTS
+              </span>
+              <h2 className="text-3xl font-extrabold text-text-primary tracking-tight">
+                Problems Addressed
               </h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 {caseStudy.problems.map((prob, idx) => (
                   <div
                     key={idx}
-                    className="p-5 rounded-xl bg-surface border border-border"
+                    className="p-6 rounded-xl bg-surface border border-border space-y-2.5"
                   >
-                    <div className="flex items-center gap-2 text-amber-400 font-semibold text-sm mb-2">
-                      <AlertCircle className="w-4 h-4 flex-shrink-0" />
-                      <span>{prob.title}</span>
-                    </div>
-                    <p className="text-xs sm:text-sm text-text-secondary leading-relaxed">
+                    <span className="font-mono text-xs font-bold text-accent block">
+                      0{idx + 1}
+                    </span>
+                    <h3 className="text-base font-bold text-text-primary">
+                      {prob.title}
+                    </h3>
+                    <p className="text-sm text-text-secondary leading-relaxed">
                       {prob.description}
                     </p>
                   </div>
@@ -188,56 +189,49 @@ export default function ProjectCaseStudy() {
 
           {/* Section: User Flows */}
           {caseStudy?.userFlows && (
-            <section className="space-y-6">
-              <h2 className="text-2xl font-bold text-text-primary tracking-tight pb-3 border-b border-border">
-                03. User Flows & Task Pathways
+            <section className="space-y-6 pt-12 border-t border-border">
+              <span className="font-mono text-xs uppercase tracking-widest text-text-muted block">
+                03 / USER FLOWS
+              </span>
+              <h2 className="text-3xl font-extrabold text-text-primary tracking-tight">
+                Key Task Pathways
               </h2>
-              <div className="space-y-3">
+              <div className="space-y-4">
                 {caseStudy.userFlows.map((flow, idx) => (
                   <div
                     key={idx}
-                    className="p-4 rounded-xl bg-surface-elevated/70 border border-border"
+                    className="p-5 rounded-xl bg-surface border border-border flex flex-col sm:flex-row sm:items-center justify-between gap-3"
                   >
-                    <h4 className="text-sm font-bold text-accent mb-1 font-mono">
+                    <span className="text-sm font-bold text-text-primary font-mono sm:w-1/3">
                       {flow.stage}
-                    </h4>
-                    <p className="text-xs sm:text-sm text-text-secondary">
+                    </span>
+                    <span className="text-sm text-text-secondary sm:w-2/3">
                       {flow.action}
-                    </p>
+                    </span>
                   </div>
                 ))}
               </div>
             </section>
           )}
 
-          {/* Section: Wireframe & Structural Layout */}
-          {caseStudy?.wireframeNotes && (
-            <section className="space-y-4">
-              <h2 className="text-2xl font-bold text-text-primary tracking-tight pb-3 border-b border-border">
-                04. Wireframing & Structural Exploration
-              </h2>
-              <p className="text-text-secondary leading-relaxed">
-                {caseStudy.wireframeNotes}
-              </p>
-            </section>
-          )}
-
           {/* Section: Design Decisions */}
           {caseStudy?.designDecisions && (
-            <section className="space-y-6">
-              <h2 className="text-2xl font-bold text-text-primary tracking-tight pb-3 border-b border-border">
-                05. Key Design Decisions & Rationale
+            <section className="space-y-6 pt-12 border-t border-border">
+              <span className="font-mono text-xs uppercase tracking-widest text-text-muted block">
+                04 / DESIGN DECISIONS
+              </span>
+              <h2 className="text-3xl font-extrabold text-text-primary tracking-tight">
+                Decisions & Rationale
               </h2>
-              <div className="space-y-4">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 {caseStudy.designDecisions.map((item, idx) => (
                   <div
                     key={idx}
-                    className="p-5 rounded-2xl bg-surface border border-border hover:border-slate-700 transition-colors"
+                    className="p-6 rounded-xl bg-surface border border-border space-y-2"
                   >
-                    <h4 className="text-base font-bold text-text-primary mb-2 flex items-center gap-2">
-                      <CheckCircle2 className="w-4 h-4 text-accent" />
+                    <h3 className="text-base font-bold text-text-primary">
                       {item.decision}
-                    </h4>
+                    </h3>
                     <p className="text-sm text-text-secondary leading-relaxed">
                       {item.rationale}
                     </p>
@@ -249,72 +243,45 @@ export default function ProjectCaseStudy() {
 
           {/* Section: Design System */}
           {caseStudy?.designSystem && (
-            <section className="space-y-6">
-              <h2 className="text-2xl font-bold text-text-primary tracking-tight pb-3 border-b border-border">
-                06. Design System & Tokens
+            <section className="space-y-6 pt-12 border-t border-border">
+              <span className="font-mono text-xs uppercase tracking-widest text-text-muted block">
+                05 / DESIGN SYSTEM
+              </span>
+              <h2 className="text-3xl font-extrabold text-text-primary tracking-tight">
+                Tokens & Typography
               </h2>
 
-              <div className="space-y-6">
-                {/* Typography scale */}
-                <div className="p-5 rounded-xl bg-surface border border-border">
-                  <span className="text-xs font-mono uppercase tracking-wider text-text-muted block mb-2">
-                    Typography System
+              <div className="p-6 rounded-xl bg-surface border border-border space-y-6">
+                <div>
+                  <span className="text-xs font-mono uppercase tracking-wider text-text-muted block mb-1">
+                    Typography Scale
                   </span>
-                  <p className="text-sm text-text-secondary">
+                  <p className="text-base text-text-secondary">
                     {caseStudy.designSystem.typography}
                   </p>
                 </div>
 
-                {/* Color Swatches */}
                 {caseStudy.designSystem.colors && (
                   <div>
                     <span className="text-xs font-mono uppercase tracking-wider text-text-muted block mb-3">
-                      Token Color Palette
+                      Color Tokens
                     </span>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+                    <div className="grid grid-cols-2 sm:grid-cols-5 gap-3">
                       {caseStudy.designSystem.colors.map((color, idx) => (
-                        <div
-                          key={idx}
-                          className="p-3 rounded-xl bg-surface border border-border flex items-center gap-3"
-                        >
+                        <div key={idx} className="space-y-1.5">
                           <div
-                            className="w-10 h-10 rounded-lg border border-border flex-shrink-0 shadow-sm"
+                            className="w-full h-12 rounded-lg border border-border"
                             style={{ backgroundColor: color.hex }}
                           />
-                          <div className="min-w-0">
-                            <span className="text-xs font-bold text-text-primary block truncate">
-                              {color.name}
-                            </span>
-                            <span className="text-[11px] font-mono text-accent block">
-                              {color.hex}
-                            </span>
-                            <span className="text-[10px] text-text-muted block truncate">
-                              {color.role}
-                            </span>
-                          </div>
+                          <span className="text-xs font-bold text-text-primary block truncate">
+                            {color.name}
+                          </span>
+                          <span className="text-[11px] font-mono text-text-muted block">
+                            {color.hex}
+                          </span>
                         </div>
                       ))}
                     </div>
-                  </div>
-                )}
-
-                {/* Atomic components */}
-                {caseStudy.designSystem.components && (
-                  <div className="p-5 rounded-xl bg-surface border border-border">
-                    <span className="text-xs font-mono uppercase tracking-wider text-text-muted block mb-3">
-                      Atomic Components Created
-                    </span>
-                    <ul className="space-y-2">
-                      {caseStudy.designSystem.components.map((comp, idx) => (
-                        <li
-                          key={idx}
-                          className="flex items-center gap-2 text-sm text-text-secondary"
-                        >
-                          <span className="w-1.5 h-1.5 rounded-full bg-accent" />
-                          <span>{comp}</span>
-                        </li>
-                      ))}
-                    </ul>
                   </div>
                 )}
               </div>
@@ -323,47 +290,45 @@ export default function ProjectCaseStudy() {
 
           {/* Section: Dev Handoff */}
           {caseStudy?.devHandoff && (
-            <section className="space-y-4">
-              <h2 className="text-2xl font-bold text-text-primary tracking-tight pb-3 border-b border-border">
-                07. Front-End Alignment & Development Handoff
-              </h2>
-              <div className="p-6 rounded-2xl bg-surface border border-border">
-                <div className="flex items-center gap-2 text-accent font-semibold mb-3">
-                  <FileCode className="w-5 h-5" />
-                  <span>Bridging Figma with React & Tailwind</span>
-                </div>
-                <p className="text-sm sm:text-base text-text-secondary leading-relaxed">
+            <section className="space-y-4 pt-12 border-t border-border">
+              <span className="font-mono text-xs uppercase tracking-widest text-text-muted block">
+                06 / DEVELOPMENT HANDOFF
+              </span>
+              <div className="p-8 rounded-xl bg-surface border border-border space-y-3">
+                <h3 className="text-lg font-bold text-text-primary">
+                  Bridging Figma with Front-End Code
+                </h3>
+                <p className="text-base text-text-secondary leading-relaxed">
                   {caseStudy.devHandoff}
                 </p>
               </div>
             </section>
           )}
 
-          {/* Section: Reflection */}
+          {/* Section: Reflections */}
           {caseStudy?.reflection && (
-            <section className="space-y-4">
-              <h2 className="text-2xl font-bold text-text-primary tracking-tight pb-3 border-b border-border">
-                08. Reflection & Takeaways
-              </h2>
+            <section className="space-y-4 pt-12 border-t border-border">
+              <span className="font-mono text-xs uppercase tracking-widest text-text-muted block">
+                07 / REFLECTION
+              </span>
               <div className="space-y-3">
                 {caseStudy.reflection.map((ref, idx) => (
                   <div
                     key={idx}
-                    className="p-4 rounded-xl bg-surface-elevated/50 border border-border text-text-secondary text-sm leading-relaxed flex items-start gap-3"
+                    className="p-5 rounded-xl bg-surface border border-border text-base text-text-secondary leading-relaxed"
                   >
-                    <CheckCircle className="w-4 h-4 text-accent flex-shrink-0 mt-0.5" />
-                    <span>{ref}</span>
+                    {ref}
                   </div>
                 ))}
               </div>
             </section>
           )}
 
-          {/* Bottom Next Project Banner */}
-          <div className="pt-12 border-t border-border flex flex-col sm:flex-row items-center justify-between gap-6">
+          {/* Bottom Next Project Link */}
+          <div className="pt-16 border-t border-border flex items-center justify-between">
             <Link
               to="/#work"
-              className="inline-flex items-center gap-2 text-sm font-semibold text-text-secondary hover:text-text-primary transition-colors"
+              className="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-wider text-text-muted hover:text-text-primary transition-colors"
             >
               <ArrowLeft className="w-4 h-4" />
               <span>Back to All Work</span>
@@ -372,17 +337,17 @@ export default function ProjectCaseStudy() {
             {nextProject && (
               <Link
                 to={`/projects/${nextProject.slug}`}
-                className="group inline-flex items-center gap-3 p-4 rounded-xl bg-surface border border-border hover:border-accent transition-all text-right"
+                className="group inline-flex items-center gap-3 text-right"
               >
                 <div>
                   <span className="text-[10px] font-mono uppercase text-text-muted block">
                     Next Project
                   </span>
-                  <span className="text-sm font-bold text-text-primary group-hover:text-accent transition-colors">
+                  <span className="text-base font-bold text-text-primary group-hover:text-accent transition-colors">
                     {nextProject.shortTitle}
                   </span>
                 </div>
-                <ArrowRight className="w-4 h-4 text-accent transition-transform group-hover:translate-x-1" />
+                <ArrowRight className="w-4 h-4 text-text-primary transition-transform group-hover:translate-x-1" />
               </Link>
             )}
           </div>

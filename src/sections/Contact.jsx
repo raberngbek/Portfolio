@@ -1,131 +1,94 @@
 import React, { useState } from 'react';
-import SectionTitle from '../components/ui/SectionTitle';
-import Button from '../components/ui/Button';
-import { Mail, Github, MapPin, Copy, Check, ArrowUpRight, Download, Send } from 'lucide-react';
+import { ArrowUpRight, Copy, Check, Download, Mail } from 'lucide-react';
 
 export default function Contact() {
   const [copied, setCopied] = useState(false);
   const email = 'chhtheara0044@gmail.com';
   const github = 'https://github.com/raberngbek';
 
-  const handleCopyEmail = () => {
+  const handleCopy = () => {
     navigator.clipboard.writeText(email);
     setCopied(true);
     setTimeout(() => setCopied(false), 2500);
   };
 
   return (
-    <section id="contact" className="py-20 md:py-28 bg-background relative overflow-hidden">
-      {/* Ambient background glow */}
-      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[700px] h-[350px] bg-accent/5 rounded-full blur-[140px] pointer-events-none" />
-
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="max-w-4xl mx-auto text-center">
-          <span className="inline-flex items-center px-3.5 py-1 mb-4 text-xs font-semibold tracking-wider uppercase rounded-full bg-surface-elevated text-accent border border-border">
-            Get In Touch
+    <section id="contact" className="py-24 md:py-40">
+      <div className="max-w-content mx-auto px-6 sm:px-8 lg:px-12">
+        <div className="max-w-3xl space-y-8">
+          
+          <span className="font-mono text-xs uppercase tracking-widest text-text-muted block">
+            GET IN TOUCH
           </span>
 
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-text-primary text-gradient">
-            Looking for a Product Design intern?
+          <h2 className="text-5xl sm:text-6xl md:text-7xl font-extrabold tracking-tighter text-text-primary leading-[1.02]">
+            Let's build something <br />
+            useful.
           </h2>
 
-          <p className="mt-4 text-base sm:text-lg text-text-secondary max-w-2xl mx-auto leading-relaxed">
-            I’m currently looking for opportunities where I can learn from an experienced product team, contribute to real digital products and continue improving my product design skills.
+          <p className="text-xl sm:text-2xl text-text-secondary leading-relaxed font-normal">
+            I'm currently looking for UI/UX and Product Design internship opportunities where I can learn from an experienced team and contribute to real products.
           </p>
 
-          {/* Quick Contact Cards Grid */}
-          <div className="mt-12 grid grid-cols-1 sm:grid-cols-3 gap-4 text-left">
-            {/* Email Card */}
-            <div className="p-6 rounded-2xl bg-surface border border-border hover:border-slate-700 transition-all flex flex-col justify-between">
-              <div>
-                <div className="w-10 h-10 rounded-xl bg-accent/10 text-accent flex items-center justify-center mb-4">
-                  <Mail className="w-5 h-5" />
-                </div>
-                <span className="text-xs font-mono uppercase text-text-muted block">Email</span>
-                <span className="text-sm font-semibold text-text-primary block mt-1 break-all">
-                  {email}
-                </span>
-              </div>
-
-              <div className="mt-6 flex items-center gap-2">
+          <div className="pt-8 border-t border-border grid grid-cols-1 sm:grid-cols-2 gap-8 text-sm">
+            {/* Direct Email */}
+            <div className="space-y-1.5">
+              <span className="text-xs font-mono uppercase tracking-wider text-text-muted block">
+                Direct Email
+              </span>
+              <div className="flex items-center gap-3">
                 <a
                   href={`mailto:${email}`}
-                  className="flex-1 inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-lg bg-accent text-background-darker text-xs font-semibold hover:bg-accent-hover transition-colors"
+                  className="text-lg font-bold text-text-primary hover:text-accent transition-colors editorial-link"
                 >
-                  <Send className="w-3.5 h-3.5" />
-                  <span>Send Email</span>
+                  {email}
                 </a>
                 <button
                   type="button"
-                  onClick={handleCopyEmail}
-                  className="p-2 rounded-lg bg-surface-elevated border border-border text-text-secondary hover:text-text-primary hover:border-slate-600 transition-colors"
-                  title="Copy email to clipboard"
-                  aria-label="Copy email"
+                  onClick={handleCopy}
+                  className="p-1.5 rounded-md hover:bg-surface border border-transparent hover:border-border text-text-muted hover:text-text-primary transition-all"
+                  title="Copy email address"
+                  aria-label="Copy email address"
                 >
                   {copied ? <Check className="w-4 h-4 text-accent-emerald" /> : <Copy className="w-4 h-4" />}
                 </button>
               </div>
             </div>
 
-            {/* GitHub Card */}
-            <div className="p-6 rounded-2xl bg-surface border border-border hover:border-slate-700 transition-all flex flex-col justify-between">
-              <div>
-                <div className="w-10 h-10 rounded-xl bg-accent-purple/10 text-accent-purple flex items-center justify-center mb-4">
-                  <Github className="w-5 h-5" />
-                </div>
-                <span className="text-xs font-mono uppercase text-text-muted block">GitHub Profile</span>
-                <span className="text-sm font-semibold text-text-primary block mt-1">
-                  raberngbek
-                </span>
-              </div>
-
-              <div className="mt-6">
+            {/* Profile & Code */}
+            <div className="space-y-1.5">
+              <span className="text-xs font-mono uppercase tracking-wider text-text-muted block">
+                Online Profiles
+              </span>
+              <div className="flex flex-col space-y-1 text-base font-semibold">
                 <a
                   href={github}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-full inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-lg bg-surface-elevated border border-border text-text-primary text-xs font-semibold hover:border-accent hover:text-accent transition-colors"
+                  className="inline-flex items-center gap-1 text-text-primary hover:text-accent transition-colors"
                 >
-                  <span>View Repositories</span>
-                  <ArrowUpRight className="w-3.5 h-3.5" />
+                  <span className="editorial-link">GitHub • raberngbek</span>
+                  <ArrowUpRight className="w-3.5 h-3.5 text-text-muted" />
                 </a>
-              </div>
-            </div>
-
-            {/* Location & Availability Card */}
-            <div className="p-6 rounded-2xl bg-surface border border-border hover:border-slate-700 transition-all flex flex-col justify-between">
-              <div>
-                <div className="w-10 h-10 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center mb-4">
-                  <MapPin className="w-5 h-5" />
-                </div>
-                <span className="text-xs font-mono uppercase text-text-muted block">Location</span>
-                <span className="text-sm font-semibold text-text-primary block mt-1">
+                <span className="text-sm font-medium text-text-muted">
                   Phnom Penh, Cambodia
-                </span>
-              </div>
-
-              <div className="mt-6 pt-3 border-t border-border/50 flex items-center justify-between text-xs">
-                <span className="text-text-muted">Status:</span>
-                <span className="font-semibold text-accent-emerald flex items-center gap-1.5">
-                  <span className="w-2 h-2 rounded-full bg-accent-emerald animate-pulse"></span>
-                  Ready to Start
                 </span>
               </div>
             </div>
           </div>
 
-          {/* Secondary Action: Resume Download */}
-          <div className="mt-10 pt-8 border-t border-border/60 flex flex-col sm:flex-row items-center justify-center gap-4">
-            <Button
+          {/* Resume Download Action */}
+          <div className="pt-4">
+            <a
               href="/resume/Chhaeng_Sokuntheara_Resume.pdf"
-              variant="outline"
-              size="md"
               target="_blank"
+              rel="noopener noreferrer"
               download
+              className="inline-flex items-center gap-2 text-sm font-bold uppercase tracking-wider px-6 py-3.5 rounded-full border border-text-primary text-text-primary hover:bg-text-primary hover:text-background transition-all"
             >
-              <Download className="w-4 h-4 mr-2" />
-              Download My Resume (PDF)
-            </Button>
+              <Download className="w-4 h-4" />
+              <span>Download Resume (PDF)</span>
+            </a>
           </div>
 
         </div>
